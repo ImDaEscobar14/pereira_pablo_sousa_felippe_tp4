@@ -8,72 +8,74 @@ class_name Player
 @export var bullet_speed: float = 700.0
 @export var shoot_cooldown: float = 0.2
 @export var bullet_spawn_push: float = 10.0
-@onready var shoot_sound: AudioStreamPlayer2D = $ShootSound
 
-
-
+# Gun offsets (tweak in Inspector)
 @export var gun_offset_right: Vector2 = Vector2(-5, 0)
 @export var gun_offset_left: Vector2 = Vector2(-25, 0)
 @export var gun_offset_up: Vector2 = Vector2(-13, -6)
 @export var gun_offset_down: Vector2 = Vector2(6, 6)
 
-
+# Draw order control
 @export var gun_z_front: int = 20
-@export var gun_z_back: int = 5  
+@export var gun_z_back: int = 5  # behind player when facing up
 
 var has_gun: bool = false
 var ammo: int = 0
 var shoot_timer: float = 0.0
 
-
+# Nodes
 @onready var animation: AnimatedSprite2D = $AnimatedSprite2D
 @onready var pas_son: AudioStreamPlayer2D = $AudioStreamPlayer2D
 @onready var overlay: ColorRect = $CanvasLayer/OverlayRed
 @onready var damage_sound: AudioStreamPlayer2D = $DamageSound
 
+# ✅ Shoot sound (AudioStreamPlayer2D named "ShootSound" under Player)
+@onready var shoot_sound: AudioStreamPlayer2D = get_node_or_null("ShootSound")
 
+# Gun nodes (must exist in Player scene)
 @onready var gun_holder: Node2D = get_node_or_null("GunHolder")
 @onready var gun_sprite: Sprite2D = get_node_or_null("GunHolder/GunSprite")
 @onready var muzzle: Marker2D = get_node_or_null("GunHolder/Muzzle")
 
 var muzzle_base_pos: Vector2 = Vector2.ZERO
 
-
+# Game Over UI (we'll ask the UI to show itself; button handles restart in game_over_ui.gd)
 @onready var game_over_ui: CanvasLayer = get_tree().current_scene.get_node_or_null("game_over_ui")
-@onready var game_over_label = game_over_ui.get_node_or_null("game_over_label") if game_over_ui else null
-@onready var restart_button = game_over_ui.get_node_or_null("bouton_recommencer") if game_over_ui else null
 
-
+# Movement / animation
 const SPEED = 75.0
 var directionName: String = "bas"
 
-
+# Health
 var max_health := 3
 var health := max_health
 
-
+# Key
 var has_key: bool = false
 
 func _ready():
 	add_to_group("player")
 	update_overlay()
 
-	if game_over_label:
-		game_over_label.visible = false
-	if restart_button:
-		restart_button.visible = false
-
-
+	# Hide gun until picked up (we may show it again after restoring GameState)
 	if gun_holder:
 		gun_holder.visible = false
 
-
+	# Save muzzle base position (force X positive so right is always +X)
 	if muzzle:
 		muzzle_base_pos = muzzle.position
 		muzzle_base_pos.x = abs(muzzle_base_pos.x)
 
-func _physics_process(delta):
+	# ✅ Restore inventory after scene change
+	has_gun = GameState.has_gun
+	ammo = GameState.ammo
 
+	if has_gun and gun_holder:
+		gun_holder.visible = true
+		update_gun_direction()
+
+func _physics_process(delta):
+	# shooting cooldown timer
 	shoot_timer = max(0.0, shoot_timer - delta)
 
 	var move_input := Vector2(
@@ -81,7 +83,7 @@ func _physics_process(delta):
 		Input.get_axis("haut", "bas")
 	)
 
-
+	# Movement + footsteps
 	if move_input != Vector2.ZERO:
 		velocity = move_input.normalized() * SPEED
 		if not pas_son.playing:
@@ -92,14 +94,14 @@ func _physics_process(delta):
 		if pas_son.playing:
 			pas_son.stop()
 
-
+	# Update facing name for animations (based on last input)
 	if move_input != Vector2.ZERO:
 		if abs(move_input.x) > abs(move_input.y):
 			directionName = "droite" if move_input.x > 0 else "gauche"
 		else:
 			directionName = "haut" if move_input.y < 0 else "bas"
 
-
+	# Update gun direction every frame
 	update_gun_direction()
 
 	# Animation
@@ -112,6 +114,7 @@ func _physics_process(delta):
 	else:
 		animation.play("animation_" + directionName)
 
+	# Shoot (bullets use the ACTUAL gun direction, not the name string)
 	if has_gun and Input.is_action_just_pressed("shoot"):
 		try_shoot()
 
@@ -124,8 +127,10 @@ func try_shoot() -> void:
 		return
 	if bullet_scene == null:
 		return
-		
+
+	# ✅ PLAY GUNSHOT SOUND
 	if shoot_sound:
+		shoot_sound.pitch_scale = randf_range(0.95, 1.05) # optional
 		shoot_sound.play()
 
 	var dir: Vector2 = get_gun_dir()
@@ -133,10 +138,12 @@ func try_shoot() -> void:
 	var b = bullet_scene.instantiate()
 	get_tree().current_scene.add_child(b)
 
+	# Spawn position: muzzle if exists, otherwise player position
 	var spawn_pos: Vector2 = global_position
 	if muzzle:
 		spawn_pos = muzzle.global_position
 
+	# Push bullet forward so it starts in front of the barrel (not inside player)
 	spawn_pos += dir * bullet_spawn_push
 	b.global_position = spawn_pos
 
@@ -144,12 +151,14 @@ func try_shoot() -> void:
 		b.setup(dir, bullet_speed, 1)
 
 	ammo -= 1
+	GameState.ammo = ammo  # ✅ save ammo globally
 	shoot_timer = shoot_cooldown
 
 func update_gun_direction() -> void:
 	if not has_gun or gun_holder == null:
 		return
 
+	# Reset muzzle to base each time
 	if muzzle:
 		muzzle.position = muzzle_base_pos
 
@@ -186,9 +195,7 @@ func update_gun_direction() -> void:
 			if gun_sprite:
 				gun_sprite.flip_h = false
 
-
 func get_gun_dir() -> Vector2:
-
 	if gun_holder:
 		if is_equal_approx(gun_holder.rotation_degrees, -90.0):
 			return Vector2.UP
@@ -235,22 +242,17 @@ func die():
 	velocity = Vector2.ZERO
 	animation.play("animation_idle")
 
-	if game_over_label:
-		game_over_label.visible = true
-
-	if restart_button:
-		restart_button.visible = true
-		if not restart_button.pressed.is_connected(_on_restart_pressed):
-			restart_button.pressed.connect(_on_restart_pressed)
-
-func _on_restart_pressed():
-	get_tree().reload_current_scene()
+	if game_over_ui and game_over_ui.has_method("show_game_over"):
+		game_over_ui.show_game_over()
 
 func equip_gun() -> void:
 	has_gun = true
+	GameState.has_gun = true
+
 	if gun_holder:
 		gun_holder.visible = true
 		update_gun_direction()
 
 func add_ammo(amount: int = 1) -> void:
 	ammo += amount
+	GameState.ammo = ammo

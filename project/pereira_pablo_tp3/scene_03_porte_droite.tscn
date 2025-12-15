@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=4 uid="uid://bsr2ejermvrc6"]
+[gd_scene load_steps=6 format=4 uid="uid://bsr2ejermvrc6"]
 
 [ext_resource type="TileSet" uid="uid://jwoddmtxvqeu" path="res://assets/sprites/tiles_catacombs/catacombs_tileset.tres" id="1_viu87"]
 [ext_resource type="PackedScene" uid="uid://bsih4lhcisfdk" path="res://scripts/player.tscn" id="2_xm8md"]
 [ext_resource type="Script" uid="uid://bsahj5ehrbb7e" path="res://zone_droite_retour.gd" id="3_xm8md"]
+[ext_resource type="PackedScene" uid="uid://g583x7c54vwe" path="res://AmmoPickup.tscn" id="5_0beli"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p8pu5"]
 size = Vector2(25, 95)
@@ -28,5 +29,26 @@ script = ExtResource("3_xm8md")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="zone_droite_retour"]
 position = Vector2(-54.5, 64.5)
 shape = SubResource("RectangleShape2D_p8pu5")
+
+[node name="AmmoPickup" parent="." instance=ExtResource("5_0beli")]
+position = Vector2(178, 225)
+
+[node name="AmmoPickup2" parent="." instance=ExtResource("5_0beli")]
+position = Vector2(96, 431)
+
+[node name="AmmoPickup3" parent="." instance=ExtResource("5_0beli")]
+position = Vector2(114, 556)
+
+[node name="AmmoPickup4" parent="." instance=ExtResource("5_0beli")]
+position = Vector2(435, 500)
+
+[node name="AmmoPickup5" parent="." instance=ExtResource("5_0beli")]
+position = Vector2(770, 601)
+
+[node name="AmmoPickup6" parent="." instance=ExtResource("5_0beli")]
+position = Vector2(1111, 279)
+
+[node name="AmmoPickup7" parent="." instance=ExtResource("5_0beli")]
+position = Vector2(1029, 138)
 
 [connection signal="body_entered" from="zone_droite_retour" to="zone_droite_retour" method="_on_body_entered"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://dfa1lmth2iaro"]
+[gd_scene load_steps=19 format=4 uid="uid://dfa1lmth2iaro"]
 
 [ext_resource type="Script" uid="uid://bpn14qinrf8a2" path="res://game_manager.gd" id="1_rj586"]
 [ext_resource type="PackedScene" uid="uid://bsih4lhcisfdk" path="res://scripts/player.tscn" id="2_0e48y"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" uid="uid://118cs7fgyolk" path="res://flashlight.gd" id="9_4d7sh"]
 [ext_resource type="Script" uid="uid://dvi1c8lahb0oc" path="res://key.gd" id="11_hqns4"]
 [ext_resource type="Script" uid="uid://31nutac7ytgj" path="res://Door.gd" id="12_x0ka3"]
+[ext_resource type="Script" uid="uid://bjufkbjb48gex" path="res://game_over_ui.gd" id="13_nr8wp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x0ka3"]
 size = Vector2(32, 44)
@@ -201,6 +202,7 @@ autoplay = true
 parameters/looping = true
 
 [node name="game_over_ui" type="CanvasLayer" parent="."]
+script = ExtResource("13_nr8wp")
 
 [node name="game_over_label" type="Label" parent="game_over_ui"]
 visible = false
@@ -218,7 +220,7 @@ offset_right = 471.0
 offset_bottom = 585.0
 text = "Recommencer"
 
-[node name="Menu" parent="game_over_ui" instance=ExtResource("7_d21ai")]
+[node name="Menu" parent="game_over_ui" groups=["game"] instance=ExtResource("7_d21ai")]
 visible = false
 
 [connection signal="body_entered" from="zone_zone" to="zone_zone" method="_on_body_entered"]

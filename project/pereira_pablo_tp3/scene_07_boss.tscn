@@ -1,9 +1,13 @@
-[gd_scene load_steps=5 format=4 uid="uid://dfec84ujip067"]
+[gd_scene load_steps=9 format=4 uid="uid://dfec84ujip067"]
 
 [ext_resource type="TileSet" uid="uid://jwoddmtxvqeu" path="res://assets/sprites/tiles_catacombs/catacombs_tileset.tres" id="1_cs11y"]
 [ext_resource type="PackedScene" uid="uid://bsih4lhcisfdk" path="res://scripts/player.tscn" id="2_3yh6c"]
 [ext_resource type="Texture2D" uid="uid://ch05tm4n6e308" path="res://assets/texture/light.png" id="2_hcejx"]
 [ext_resource type="PackedScene" uid="uid://g583x7c54vwe" path="res://AmmoPickup.tscn" id="5_hkle6"]
+[ext_resource type="PackedScene" uid="uid://u6oidunldggm" path="res://monster.tscn" id="5_po7e1"]
+[ext_resource type="PackedScene" uid="uid://c0wf751d2jbm" path="res://GunPickup.tscn" id="6_hkle6"]
+[ext_resource type="Script" uid="uid://ddn63nmwus5o2" path="res://victory_ui.gd" id="7_l3oyn"]
+[ext_resource type="PackedScene" uid="uid://dfa1lmth2iaro" path="res://node_2d.tscn" id="8_mfnct"]
 
 [node name="scene_07_boss" type="Node2D"]
 
@@ -138,7 +142,7 @@ energy = 5.57
 texture = ExtResource("2_hcejx")
 
 [node name="player" parent="." instance=ExtResource("2_3yh6c")]
-position = Vector2(584, 1136)
+position = Vector2(581, 1134)
 
 [node name="AmmoPickup3" parent="." instance=ExtResource("5_hkle6")]
 position = Vector2(90, 240)
@@ -147,4 +151,40 @@ position = Vector2(90, 240)
 position = Vector2(785, 282)
 
 [node name="AmmoPickup15" parent="." instance=ExtResource("5_hkle6")]
-position = Vector2(462, 349)
+position = Vector2(512, 521)
+
+[node name="monster" parent="." instance=ExtResource("5_po7e1")]
+position = Vector2(520, 242)
+
+[node name="GunPickup" parent="." instance=ExtResource("6_hkle6")]
+position = Vector2(581, 1077)
+
+[node name="victory_ui" type="CanvasLayer" parent="."]
+script = ExtResource("7_l3oyn")
+first_scene = ExtResource("8_mfnct")
+
+[node name="victory_label" type="Label" parent="victory_ui"]
+visible = false
+anchors_preset = -1
+anchor_left = 0.49
+anchor_top = 0.426
+anchor_right = 0.49
+anchor_bottom = 0.426
+offset_left = -30.48
+offset_top = 5.952
+offset_right = 35.52
+offset_bottom = 33.952
+text = "Victoire!"
+
+[node name="bouton_menu" type="Button" parent="victory_ui"]
+visible = false
+anchors_preset = -1
+anchor_left = 0.491
+anchor_top = 0.449
+anchor_right = 0.491
+anchor_bottom = 0.449
+offset_left = -59.632
+offset_top = 21.048
+offset_right = 60.368
+offset_bottom = 52.048
+text = "Recommencer"
