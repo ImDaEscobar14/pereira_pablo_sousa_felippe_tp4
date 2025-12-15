@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dyu4ho43pta8j"
+path="res://.godot/imported/Unhinged Betrayal.mp3-57f3a734faacbe0e51534a64aeacaeae.mp3str"
+
+[deps]
+
+source_file="res://assets/audio/musique/Unhinged Betrayal.mp3"
+dest_files=["res://.godot/imported/Unhinged Betrayal.mp3-57f3a734faacbe0e51534a64aeacaeae.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

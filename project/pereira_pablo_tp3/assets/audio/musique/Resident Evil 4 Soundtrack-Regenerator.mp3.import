@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://b07thisyu3pyy"
+path="res://.godot/imported/Resident Evil 4 Soundtrack-Regenerator.mp3-45610b0a823eb5fc8ba118cc5265b304.mp3str"
+
+[deps]
+
+source_file="res://assets/audio/musique/Resident Evil 4 Soundtrack-Regenerator.mp3"
+dest_files=["res://.godot/imported/Resident Evil 4 Soundtrack-Regenerator.mp3-45610b0a823eb5fc8ba118cc5265b304.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

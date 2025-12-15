@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bsih4lhcisfdk" path="res://scripts/player.tscn" id="3_qvhbw"]
 [ext_resource type="AudioStream" uid="uid://crj83xn7c0ksp" path="res://assets/audio/musique/creepy_sound_02.mp3" id="5_m6mjj"]
 [ext_resource type="Script" uid="uid://cv447ecf5yry3" path="res://zone_gauche.gd" id="6_m6mjj"]
-[ext_resource type="Script" path="res://zone_droite.gd" id="7_468bc"]
+[ext_resource type="Script" uid="uid://1qopeb5kcy6y" path="res://zone_droite.gd" id="7_468bc"]
 [ext_resource type="Script" uid="uid://dymt0ahy84vr4" path="res://zone_boss.gd" id="8_kbujq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_468bc"]
