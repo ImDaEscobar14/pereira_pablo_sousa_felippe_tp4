@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://5wjlgvm5v3yw"
-path="res://.godot/imported/sit.png-0d7e8c50918ae4e1c9a4ce61bf647a04.ctex"
+path="res://.godot/imported/sit.png-650266819ba647d4cadb4c45d046170f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://animation/standard/sit.png"
-dest_files=["res://.godot/imported/sit.png-0d7e8c50918ae4e1c9a4ce61bf647a04.ctex"]
+source_file="res://assets/sprites/wolf/standard/sit.png"
+dest_files=["res://.godot/imported/sit.png-650266819ba647d4cadb4c45d046170f.ctex"]
 
 [params]
 

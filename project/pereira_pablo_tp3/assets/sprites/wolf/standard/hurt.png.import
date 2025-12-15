@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ca4wiqp2iv7"
-path="res://.godot/imported/hurt.png-977174974adfcc0e8163343f5a119e3e.ctex"
+path="res://.godot/imported/hurt.png-535bc556aceebbe4f2ea40eca42b0088.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://animation/standard/hurt.png"
-dest_files=["res://.godot/imported/hurt.png-977174974adfcc0e8163343f5a119e3e.ctex"]
+source_file="res://assets/sprites/wolf/standard/hurt.png"
+dest_files=["res://.godot/imported/hurt.png-535bc556aceebbe4f2ea40eca42b0088.ctex"]
 
 [params]
 

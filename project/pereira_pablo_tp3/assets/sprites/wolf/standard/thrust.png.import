@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://6x6bnf8ju4lw"
-path="res://.godot/imported/thrust.png-db065ffaf87c5f9d3d928ac040364249.ctex"
+path="res://.godot/imported/thrust.png-2339fec071d8669d1129f4776e2568fc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://animation/standard/thrust.png"
-dest_files=["res://.godot/imported/thrust.png-db065ffaf87c5f9d3d928ac040364249.ctex"]
+source_file="res://assets/sprites/wolf/standard/thrust.png"
+dest_files=["res://.godot/imported/thrust.png-2339fec071d8669d1129f4776e2568fc.ctex"]
 
 [params]
 

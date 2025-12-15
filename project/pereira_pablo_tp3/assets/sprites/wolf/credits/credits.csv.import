@@ -6,10 +6,10 @@ uid="uid://die20lbuk45eq"
 
 [deps]
 
-files=["res://animation/credits/credits.notes.translation", "res://animation/credits/credits.authors.translation", "res://animation/credits/credits.licenses.translation", "res://animation/credits/credits.urls.translation"]
+files=["res://assets/sprites/wolf/credits/credits.notes.translation", "res://assets/sprites/wolf/credits/credits.authors.translation", "res://assets/sprites/wolf/credits/credits.licenses.translation", "res://assets/sprites/wolf/credits/credits.urls.translation"]
 
-source_file="res://animation/credits/credits.csv"
-dest_files=["res://animation/credits/credits.notes.translation", "res://animation/credits/credits.authors.translation", "res://animation/credits/credits.licenses.translation", "res://animation/credits/credits.urls.translation"]
+source_file="res://assets/sprites/wolf/credits/credits.csv"
+dest_files=["res://assets/sprites/wolf/credits/credits.notes.translation", "res://assets/sprites/wolf/credits/credits.authors.translation", "res://assets/sprites/wolf/credits/credits.licenses.translation", "res://assets/sprites/wolf/credits/credits.urls.translation"]
 
 [params]
 

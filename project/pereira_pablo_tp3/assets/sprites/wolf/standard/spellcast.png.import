@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://d2u65x163r8yp"
-path="res://.godot/imported/spellcast.png-8ffa5c60ab90b9c5ebef6967c4deb60c.ctex"
+path="res://.godot/imported/spellcast.png-3432e62eddb42c942bed1a107f57f00f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://animation/standard/spellcast.png"
-dest_files=["res://.godot/imported/spellcast.png-8ffa5c60ab90b9c5ebef6967c4deb60c.ctex"]
+source_file="res://assets/sprites/wolf/standard/spellcast.png"
+dest_files=["res://.godot/imported/spellcast.png-3432e62eddb42c942bed1a107f57f00f.ctex"]
 
 [params]
 

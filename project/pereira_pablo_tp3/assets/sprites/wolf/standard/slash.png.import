@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ph4mh4qnev7"
-path="res://.godot/imported/slash.png-4b97ce4257e03e07d5ea933d4cce3785.ctex"
+path="res://.godot/imported/slash.png-5b35d0197aa53b25098b8d81500956e2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://animation/standard/slash.png"
-dest_files=["res://.godot/imported/slash.png-4b97ce4257e03e07d5ea933d4cce3785.ctex"]
+source_file="res://assets/sprites/wolf/standard/slash.png"
+dest_files=["res://.godot/imported/slash.png-5b35d0197aa53b25098b8d81500956e2.ctex"]
 
 [params]
 

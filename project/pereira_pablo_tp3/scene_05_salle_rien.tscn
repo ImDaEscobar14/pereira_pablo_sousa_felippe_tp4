@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=4 uid="uid://bqidvlwhx0qmp"]
+[gd_scene load_steps=4 format=4 uid="uid://bqidvlwhx0qmp"]
 
 [ext_resource type="TileSet" uid="uid://jwoddmtxvqeu" path="res://assets/sprites/tiles_catacombs/catacombs_tileset.tres" id="1_kdisl"]
 [ext_resource type="PackedScene" uid="uid://bsih4lhcisfdk" path="res://scripts/player.tscn" id="2_5an35"]
+[ext_resource type="Texture2D" uid="uid://ch05tm4n6e308" path="res://assets/texture/light.png" id="3_rqitf"]
 
 [node name="scene_05_salle_rien" type="Node2D"]
 
@@ -15,3 +16,59 @@ tile_set = ExtResource("1_kdisl")
 
 [node name="player" parent="." instance=ExtResource("2_5an35")]
 position = Vector2(226, 646)
+
+[node name="PointLight2D9" type="PointLight2D" parent="."]
+position = Vector2(463, 522)
+scale = Vector2(0.119209, 0.0850663)
+color = Color(0.551216, 0.264891, 9.62615e-08, 1)
+energy = 6.97
+texture = ExtResource("3_rqitf")
+
+[node name="PointLight2D9" type="PointLight2D" parent="PointLight2D9"]
+position = Vector2(-564.921, -3540.09)
+scale = Vector2(0.536135, 0.500679)
+color = Color(0.551216, 0.264891, 9.62615e-08, 1)
+energy = 6.97
+texture = ExtResource("3_rqitf")
+
+[node name="PointLight2D10" type="PointLight2D" parent="PointLight2D9"]
+position = Vector2(-90.1776, 1010.98)
+scale = Vector2(0.761858, 0.964321)
+color = Color(0.551216, 0.264891, 9.62615e-08, 1)
+energy = 6.97
+texture = ExtResource("3_rqitf")
+
+[node name="PointLight2D9" type="PointLight2D" parent="PointLight2D9/PointLight2D10"]
+position = Vector2(-564.921, -3540.09)
+scale = Vector2(0.536135, 0.500679)
+color = Color(0.551216, 0.264891, 9.62615e-08, 1)
+energy = 6.97
+texture = ExtResource("3_rqitf")
+
+[node name="PointLight2D10" type="PointLight2D" parent="."]
+position = Vector2(392, 455)
+scale = Vector2(0.0332374, 0.0327675)
+color = Color(0.551216, 0.264891, 9.62615e-08, 1)
+energy = 6.97
+texture = ExtResource("3_rqitf")
+
+[node name="PointLight2D11" type="PointLight2D" parent="PointLight2D10"]
+position = Vector2(373.224, 339)
+scale = Vector2(0.0178197, 0.016406)
+color = Color(0.551216, 0.264891, 9.62615e-08, 1)
+energy = 6.97
+texture = ExtResource("3_rqitf")
+
+[node name="PointLight2D9" type="PointLight2D" parent="PointLight2D10"]
+position = Vector2(-564.921, -3540.09)
+scale = Vector2(0.536135, 0.500679)
+color = Color(0.551216, 0.264891, 9.62615e-08, 1)
+energy = 6.97
+texture = ExtResource("3_rqitf")
+
+[node name="PointLight2D10" type="PointLight2D" parent="PointLight2D10"]
+position = Vector2(1955.63, 91.5536)
+scale = Vector2(2.19262, 1.86957)
+color = Color(0.551216, 0.264891, 9.62615e-08, 1)
+energy = 6.97
+texture = ExtResource("3_rqitf")

@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=4 uid="uid://mu6mqf60ihqj"]
+[gd_scene load_steps=4 format=4 uid="uid://mu6mqf60ihqj"]
 
 [ext_resource type="TileSet" uid="uid://jwoddmtxvqeu" path="res://assets/sprites/tiles_catacombs/catacombs_tileset.tres" id="1_d6owe"]
 [ext_resource type="PackedScene" uid="uid://bsih4lhcisfdk" path="res://scripts/player.tscn" id="2_rd4mr"]
+[ext_resource type="Texture2D" uid="uid://ch05tm4n6e308" path="res://assets/texture/light.png" id="3_rd4mr"]
 
 [node name="scene_06_salle_gun" type="Node2D"]
 
@@ -15,3 +16,31 @@ tile_set = ExtResource("1_d6owe")
 
 [node name="player" parent="." instance=ExtResource("2_rd4mr")]
 position = Vector2(226, 646)
+
+[node name="PointLight2D10" type="PointLight2D" parent="."]
+position = Vector2(389, 456)
+scale = Vector2(0.0737391, 0.0677622)
+color = Color(0.551216, 0.264891, 9.62615e-08, 1)
+energy = 6.97
+texture = ExtResource("3_rd4mr")
+
+[node name="PointLight2D9" type="PointLight2D" parent="PointLight2D10"]
+position = Vector2(474.646, 2302.17)
+scale = Vector2(3.07249, 1.97439)
+color = Color(0.551216, 0.264891, 9.62615e-08, 1)
+energy = 6.97
+texture = ExtResource("3_rd4mr")
+
+[node name="PointLight2D10" type="PointLight2D" parent="PointLight2D10"]
+position = Vector2(1112.03, 501.754)
+scale = Vector2(1.30742, 1.14913)
+color = Color(0.551216, 0.264891, 9.62615e-08, 1)
+energy = 6.97
+texture = ExtResource("3_rd4mr")
+
+[node name="PointLight2D9" type="PointLight2D" parent="PointLight2D10/PointLight2D10"]
+position = Vector2(-564.921, -3540.09)
+scale = Vector2(0.536135, 0.500679)
+color = Color(0.551216, 0.264891, 9.62615e-08, 1)
+energy = 6.97
+texture = ExtResource("3_rd4mr")

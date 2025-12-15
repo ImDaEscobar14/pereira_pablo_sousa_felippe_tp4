@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cuwg200n2loyo"
-path="res://.godot/imported/emote.png-6ffcfb1afdf8522c0f7d2c377b770a7e.ctex"
+path="res://.godot/imported/emote.png-416d0cc34dba676d58bd58b7d14898a7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://animation/standard/emote.png"
-dest_files=["res://.godot/imported/emote.png-6ffcfb1afdf8522c0f7d2c377b770a7e.ctex"]
+source_file="res://assets/sprites/wolf/standard/emote.png"
+dest_files=["res://.godot/imported/emote.png-416d0cc34dba676d58bd58b7d14898a7.ctex"]
 
 [params]
 
