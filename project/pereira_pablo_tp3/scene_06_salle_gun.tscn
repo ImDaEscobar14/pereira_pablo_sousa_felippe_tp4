@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=4 uid="uid://mu6mqf60ihqj"]
+[gd_scene load_steps=5 format=4 uid="uid://mu6mqf60ihqj"]
 
 [ext_resource type="TileSet" uid="uid://jwoddmtxvqeu" path="res://assets/sprites/tiles_catacombs/catacombs_tileset.tres" id="1_d6owe"]
 [ext_resource type="PackedScene" uid="uid://bsih4lhcisfdk" path="res://scripts/player.tscn" id="2_rd4mr"]
 [ext_resource type="Texture2D" uid="uid://ch05tm4n6e308" path="res://assets/texture/light.png" id="3_rd4mr"]
+[ext_resource type="PackedScene" uid="uid://c0wf751d2jbm" path="res://GunPickup.tscn" id="4_2pcrk"]
 
 [node name="scene_06_salle_gun" type="Node2D"]
 
@@ -44,3 +45,6 @@ scale = Vector2(0.536135, 0.500679)
 color = Color(0.551216, 0.264891, 9.62615e-08, 1)
 energy = 6.97
 texture = ExtResource("3_rd4mr")
+
+[node name="GunPickup" parent="." instance=ExtResource("4_2pcrk")]
+position = Vector2(425, 488)

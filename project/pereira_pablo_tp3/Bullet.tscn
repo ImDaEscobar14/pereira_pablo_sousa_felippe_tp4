@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://b2u1fw0tkpdca"]
+
+[ext_resource type="Script" uid="uid://dpswjffvdvxt0" path="res://bullet.gd" id="1_4s4u5"]
+[ext_resource type="Texture2D" uid="uid://djpkjbhp4sffk" path="res://assets/tiny_gun_icons/ammo1.png" id="2_4s4u5"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ayd6b"]
+
+[node name="Bullet" type="Area2D"]
+script = ExtResource("1_4s4u5")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_4s4u5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ayd6b")

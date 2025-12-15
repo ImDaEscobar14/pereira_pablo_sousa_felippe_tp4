@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://g583x7c54vwe"]
+
+[ext_resource type="Script" uid="uid://dhico8cnuk2wj" path="res://ammo_pickup.gd" id="1_agple"]
+[ext_resource type="Texture2D" uid="uid://djpkjbhp4sffk" path="res://assets/tiny_gun_icons/ammo1.png" id="2_agple"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_l0xwl"]
+
+[node name="AmmoPickup" type="Area2D"]
+script = ExtResource("1_agple")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_agple")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_l0xwl")

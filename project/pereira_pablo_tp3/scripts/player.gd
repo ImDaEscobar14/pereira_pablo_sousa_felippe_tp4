@@ -3,48 +3,87 @@ class_name Player
 
 @export var speed: float = 400.0
 
-# Nodes
+# --- GUN / AMMO ---
+@export var bullet_scene: PackedScene
+@export var bullet_speed: float = 700.0
+@export var shoot_cooldown: float = 0.2
+@export var bullet_spawn_push: float = 10.0
+@onready var shoot_sound: AudioStreamPlayer2D = $ShootSound
+
+
+
+@export var gun_offset_right: Vector2 = Vector2(-5, 0)
+@export var gun_offset_left: Vector2 = Vector2(-25, 0)
+@export var gun_offset_up: Vector2 = Vector2(-13, -6)
+@export var gun_offset_down: Vector2 = Vector2(6, 6)
+
+
+@export var gun_z_front: int = 20
+@export var gun_z_back: int = 5  
+
+var has_gun: bool = false
+var ammo: int = 0
+var shoot_timer: float = 0.0
+
+
 @onready var animation: AnimatedSprite2D = $AnimatedSprite2D
 @onready var pas_son: AudioStreamPlayer2D = $AudioStreamPlayer2D
 @onready var overlay: ColorRect = $CanvasLayer/OverlayRed
-
-# bruit degats
 @onready var damage_sound: AudioStreamPlayer2D = $DamageSound
 
-# Game Over UI 
-@onready var game_over_ui = get_tree().root.get_node("World/game_over_ui") # ← change "World" au besoin
-@onready var game_over_label = game_over_ui.get_node("game_over_label") if game_over_ui else null
-@onready var restart_button = game_over_ui.get_node("bouton_recommencer") if game_over_ui else null
 
-# vitesse
+@onready var gun_holder: Node2D = get_node_or_null("GunHolder")
+@onready var gun_sprite: Sprite2D = get_node_or_null("GunHolder/GunSprite")
+@onready var muzzle: Marker2D = get_node_or_null("GunHolder/Muzzle")
+
+var muzzle_base_pos: Vector2 = Vector2.ZERO
+
+
+@onready var game_over_ui: CanvasLayer = get_tree().current_scene.get_node_or_null("game_over_ui")
+@onready var game_over_label = game_over_ui.get_node_or_null("game_over_label") if game_over_ui else null
+@onready var restart_button = game_over_ui.get_node_or_null("bouton_recommencer") if game_over_ui else null
+
+
 const SPEED = 75.0
-var directionName = "bas"
+var directionName: String = "bas"
 
-# vie
+
 var max_health := 3
 var health := max_health
 
-# key
+
 var has_key: bool = false
 
 func _ready():
 	add_to_group("player")
 	update_overlay()
 
-	# Cacher l'UI au début
 	if game_over_label:
 		game_over_label.visible = false
 	if restart_button:
 		restart_button.visible = false
 
-func _physics_process(_delta):
-	var direction = Vector2(
+
+	if gun_holder:
+		gun_holder.visible = false
+
+
+	if muzzle:
+		muzzle_base_pos = muzzle.position
+		muzzle_base_pos.x = abs(muzzle_base_pos.x)
+
+func _physics_process(delta):
+
+	shoot_timer = max(0.0, shoot_timer - delta)
+
+	var move_input := Vector2(
 		Input.get_axis("gauche", "droite"),
 		Input.get_axis("haut", "bas")
 	)
 
-	if direction != Vector2.ZERO:
-		velocity = direction.normalized() * SPEED
+
+	if move_input != Vector2.ZERO:
+		velocity = move_input.normalized() * SPEED
 		if not pas_son.playing:
 			pas_son.pitch_scale = randf_range(0.8, 1.4)
 			pas_son.play()
@@ -53,14 +92,18 @@ func _physics_process(_delta):
 		if pas_son.playing:
 			pas_son.stop()
 
-	# Animation
-	if direction != Vector2.ZERO:
-		if abs(direction.x) > abs(direction.y):
-			directionName = "droite" if direction.x > 0 else "gauche"
-		else:
-			directionName = "haut" if direction.y < 0 else "bas"
 
-	if direction == Vector2.ZERO:
+	if move_input != Vector2.ZERO:
+		if abs(move_input.x) > abs(move_input.y):
+			directionName = "droite" if move_input.x > 0 else "gauche"
+		else:
+			directionName = "haut" if move_input.y < 0 else "bas"
+
+
+	update_gun_direction()
+
+	# Animation
+	if move_input == Vector2.ZERO:
 		match directionName:
 			"haut": animation.play("animation_idle")
 			"gauche": animation.play("animation_idle_gauche")
@@ -69,15 +112,98 @@ func _physics_process(_delta):
 	else:
 		animation.play("animation_" + directionName)
 
+	if has_gun and Input.is_action_just_pressed("shoot"):
+		try_shoot()
+
 	move_and_slide()
 
-# health
+func try_shoot() -> void:
+	if ammo <= 0:
+		return
+	if shoot_timer != 0.0:
+		return
+	if bullet_scene == null:
+		return
+		
+	if shoot_sound:
+		shoot_sound.play()
+
+	var dir: Vector2 = get_gun_dir()
+
+	var b = bullet_scene.instantiate()
+	get_tree().current_scene.add_child(b)
+
+	var spawn_pos: Vector2 = global_position
+	if muzzle:
+		spawn_pos = muzzle.global_position
+
+	spawn_pos += dir * bullet_spawn_push
+	b.global_position = spawn_pos
+
+	if b.has_method("setup"):
+		b.setup(dir, bullet_speed, 1)
+
+	ammo -= 1
+	shoot_timer = shoot_cooldown
+
+func update_gun_direction() -> void:
+	if not has_gun or gun_holder == null:
+		return
+
+	if muzzle:
+		muzzle.position = muzzle_base_pos
+
+	match directionName:
+		"droite":
+			gun_holder.z_index = gun_z_front
+			gun_holder.position = gun_offset_right
+			gun_holder.rotation_degrees = 0
+			if gun_sprite:
+				gun_sprite.flip_h = false
+			if muzzle:
+				muzzle.position.x = muzzle_base_pos.x
+
+		"gauche":
+			gun_holder.z_index = gun_z_front
+			gun_holder.position = gun_offset_left
+			gun_holder.rotation_degrees = 0
+			if gun_sprite:
+				gun_sprite.flip_h = true
+			if muzzle:
+				muzzle.position.x = -muzzle_base_pos.x
+
+		"haut":
+			gun_holder.z_index = gun_z_back
+			gun_holder.position = gun_offset_up
+			gun_holder.rotation_degrees = -90
+			if gun_sprite:
+				gun_sprite.flip_h = false
+
+		"bas":
+			gun_holder.z_index = gun_z_front
+			gun_holder.position = gun_offset_down
+			gun_holder.rotation_degrees = 90
+			if gun_sprite:
+				gun_sprite.flip_h = false
+
+
+func get_gun_dir() -> Vector2:
+
+	if gun_holder:
+		if is_equal_approx(gun_holder.rotation_degrees, -90.0):
+			return Vector2.UP
+		if is_equal_approx(gun_holder.rotation_degrees, 90.0):
+			return Vector2.DOWN
+
+	if gun_sprite and gun_sprite.flip_h:
+		return Vector2.LEFT
+
+	return Vector2.RIGHT
 
 func take_damage():
 	if health <= 0:
 		return
 
-	# jouer le son degats
 	if damage_sound:
 		damage_sound.play()
 
@@ -109,7 +235,6 @@ func die():
 	velocity = Vector2.ZERO
 	animation.play("animation_idle")
 
-	# UI game over
 	if game_over_label:
 		game_over_label.visible = true
 
@@ -120,3 +245,12 @@ func die():
 
 func _on_restart_pressed():
 	get_tree().reload_current_scene()
+
+func equip_gun() -> void:
+	has_gun = true
+	if gun_holder:
+		gun_holder.visible = true
+		update_gun_direction()
+
+func add_ammo(amount: int = 1) -> void:
+	ammo += amount
