@@ -36,7 +36,7 @@ tile_set = ExtResource("3_epypp")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="Level"]
 position = Vector2(-2, 4)
-color = Color(0.355313, 0.355314, 0.355314, 1)
+color = Color(0.329412, 0.329412, 0.329412, 1)
 
 [node name="Deco" type="TileMapLayer" parent="."]
 position = Vector2(0, -1)
