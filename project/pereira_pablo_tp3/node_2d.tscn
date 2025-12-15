@@ -13,7 +13,7 @@
 [ext_resource type="Script" uid="uid://118cs7fgyolk" path="res://flashlight.gd" id="9_4d7sh"]
 [ext_resource type="Script" uid="uid://dvi1c8lahb0oc" path="res://key.gd" id="11_hqns4"]
 [ext_resource type="Script" uid="uid://31nutac7ytgj" path="res://Door.gd" id="12_x0ka3"]
-[ext_resource type="Script" uid="uid://bjufkbjb48gex" path="res://game_over_ui.gd" id="13_nr8wp"]
+[ext_resource type="Script" path="res://game_over_ui.gd" id="13_nr8wp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x0ka3"]
 size = Vector2(32, 44)

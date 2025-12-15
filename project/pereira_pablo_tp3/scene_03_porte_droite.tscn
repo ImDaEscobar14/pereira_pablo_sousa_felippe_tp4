@@ -2,7 +2,7 @@
 
 [ext_resource type="TileSet" uid="uid://jwoddmtxvqeu" path="res://assets/sprites/tiles_catacombs/catacombs_tileset.tres" id="1_viu87"]
 [ext_resource type="PackedScene" uid="uid://bsih4lhcisfdk" path="res://scripts/player.tscn" id="2_xm8md"]
-[ext_resource type="Script" uid="uid://bsahj5ehrbb7e" path="res://zone_droite_retour.gd" id="3_xm8md"]
+[ext_resource type="Script" path="res://zone_droite_retour.gd" id="3_xm8md"]
 [ext_resource type="PackedScene" uid="uid://g583x7c54vwe" path="res://AmmoPickup.tscn" id="5_0beli"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p8pu5"]

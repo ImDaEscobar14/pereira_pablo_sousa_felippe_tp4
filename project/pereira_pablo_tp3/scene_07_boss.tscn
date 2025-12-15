@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://g583x7c54vwe" path="res://AmmoPickup.tscn" id="5_hkle6"]
 [ext_resource type="PackedScene" uid="uid://u6oidunldggm" path="res://monster.tscn" id="5_po7e1"]
 [ext_resource type="PackedScene" uid="uid://c0wf751d2jbm" path="res://GunPickup.tscn" id="6_hkle6"]
-[ext_resource type="Script" uid="uid://ddn63nmwus5o2" path="res://victory_ui.gd" id="7_l3oyn"]
+[ext_resource type="Script" path="res://victory_ui.gd" id="7_l3oyn"]
 [ext_resource type="PackedScene" uid="uid://dfa1lmth2iaro" path="res://node_2d.tscn" id="8_mfnct"]
 
 [node name="scene_07_boss" type="Node2D"]
